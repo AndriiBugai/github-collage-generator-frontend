@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+  }
+}
