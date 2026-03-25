@@ -7,11 +7,7 @@
     width: 100%;
   }
 
-  button {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: fit-content;
+  .gen-btn {
+    min-width: 120px;
   }
 }

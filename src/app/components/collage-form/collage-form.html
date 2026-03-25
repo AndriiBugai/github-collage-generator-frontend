@@ -8,14 +8,14 @@
     }
   </mat-form-field>
 
-<!--  TODO: change to slider-->
+  <!--  TODO: change to slider-->
   <mat-form-field appearance="outline">
     <mat-label>
       Collage Size ({{ limits.collageSize.min }} – {{ limits.collageSize.max }})
     </mat-label>
     <input matInput type="number" [formField]="collageForm.collageSize"/>
     <mat-hint>Number of followers' avatars in the collage</mat-hint>
-<!--  TODO: add a reusable component/directive to add mat-error field in one line  -->
+    <!--  TODO: add a reusable component/directive to add mat-error field in one line  -->
     @if (collageForm.collageSize().touched() && collageForm.collageSize().errors().length) {
       <mat-error>{{ collageForm.collageSize().errors()[0].message }}</mat-error>
     }
@@ -30,11 +30,13 @@
     }
   </mat-form-field>
 
-<!--  TODO: fix btn-->
-  <button mat-raised-button color="primary" type="submit" [disabled]="loading()">
+  <button class="gen-btn"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loading()">
     @if (loading()) {
       <mat-spinner diameter="20"/>
-      Generating...
     } @else {
       Generate Collage
     }
