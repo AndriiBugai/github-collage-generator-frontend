@@ -29,7 +29,7 @@ export class App {
     console.log('generate', model)
 
     this.http
-      .get('http://localhost:8080/collage', {
+      .get('/api/collage', {
         params: {login: username, size: collageSize, tileSize},
         responseType: 'blob',
       })
