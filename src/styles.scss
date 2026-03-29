@@ -13,3 +13,7 @@ $theme: mat.define-theme((
 html {
   @include mat.all-component-themes($theme);
 }
+
+body {
+  font-family: Roboto, sans-serif;
+}

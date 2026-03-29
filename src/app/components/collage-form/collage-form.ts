@@ -9,6 +9,8 @@ import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-collage-form',
+  templateUrl: './collage-form.html',
+  styleUrl: './collage-form.scss',
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -17,8 +19,6 @@ import {FormsModule} from '@angular/forms';
     FormField,
     FormsModule,
   ],
-  templateUrl: './collage-form.html',
-  styleUrl: './collage-form.scss',
 })
 export class CollageForm {
   loading = input(false);
