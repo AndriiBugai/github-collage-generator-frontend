@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>GitHub Collage Generator</h1>
+
+  <app-collage-form [isLoading]="isLoading()"
+                    (formSubmit)="generateCollage($event)"/>
+
+
+  @if (isLoadedSuccessfully() && imageUrl()) {
+    <div class="result">
+      <img [src]="imageUrl()" alt="GitHub Collage"/>
+    </div>
+  }
+</div>

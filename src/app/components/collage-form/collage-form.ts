@@ -1,4 +1,4 @@
-import {Component, input, output, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input, output, signal} from '@angular/core';
 import {form, FormField, required, min, max} from '@angular/forms/signals';
 import {CollageFormLimitsModel, CollageFormModel} from './collage-form-model';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -6,17 +6,20 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CollageConstants} from '../../constants/collage-constants';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-collage-form',
   templateUrl: './collage-form.html',
   styleUrl: './collage-form.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    FormField
+    FormField,
+    FormsModule,
   ],
 })
 export class CollageForm {
@@ -46,7 +49,7 @@ export class CollageForm {
 
   public onSubmit() {
     if (this.collageForm().valid()) {
-      this.formSubmit.emit(this.model());
+      this.formSubmit.emit(this.collageForm().value());
     }
   }
 }

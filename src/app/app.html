@@ -1,17 +1,3 @@
-<div class="container">
-  <h1>GitHub Collage Generator</h1>
-
-  <app-collage-form [loading]="loading()" (formSubmit)="generate($event)" />
-
-  @if (error()) {
-    <p class="error">{{ error() }}</p>
-  }
-
-  @if (imageUrl()) {
-    <div class="result">
-      <img [src]="imageUrl()" alt="GitHub Collage" />
-    </div>
-  }
-</div>
+<app-collage-page></app-collage-page>
 
 <router-outlet />
