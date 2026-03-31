@@ -54,5 +54,6 @@ export class CollagePage {
 
   public onFormChanged(model: CollageFormModel): void {
     this.latestFormValue.set(model);
+    this.imageUrl.set(undefined);
   }
 }
