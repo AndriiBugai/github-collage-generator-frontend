@@ -1,7 +1,7 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {delay, map} from 'rxjs';
+import {map} from 'rxjs';
 import {CollageApiService} from '../../api/collage-api.service';
 import {CollageRequestModel} from '../../api/models/collage-request.model';
 import {CollageForm} from '../../components/collage-form/collage-form';
@@ -27,7 +27,6 @@ export class CollagePage {
     params: () => this.collageApiRequest(),
     stream: ({params}) =>
       this.collageApiService.generateCollage(params).pipe(
-        delay(1800),
         map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))),
       ),
   });
