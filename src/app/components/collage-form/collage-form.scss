@@ -7,6 +7,21 @@
     width: 100%;
   }
 
+  .slider-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .value-display {
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    mat-slider {
+      flex: 1;
+    }
+  }
+
   .gen-btn {
     min-width: 120px;
   }

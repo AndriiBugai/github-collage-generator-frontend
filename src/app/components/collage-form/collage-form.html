@@ -14,35 +14,25 @@
     }
   </mat-form-field>
 
-  <!--  TODO: change to slider-->
-  <mat-form-field appearance="outline">
-    <mat-label>
-      Collage Size ({{ limits.collageSize.min }} – {{ limits.collageSize.max }})
-    </mat-label>
-    <input matInput
-           type="number"
-           [formField]="collageForm.collageSize"/>
-    <mat-hint>Number of followers' avatars in the collage</mat-hint>
-    <!--  TODO: add a reusable component/directive to add mat-error field in one line  -->
-    @if (collageForm.collageSize().touched() && collageForm.collageSize().errors().length) {
-      <mat-error>{{ collageForm.collageSize().errors()[0].message }}</mat-error>
-    }
-  </mat-form-field>
+  <div class="slider-field">
+    <mat-form-field appearance="outline" class="value-display">
+      <mat-label>Collage Size</mat-label>
+      <input matInput [value]="collageForm.collageSize().value()" disabled/>
+    </mat-form-field>
+    <mat-slider [min]="limits.collageSize.min" [max]="limits.collageSize.max" discrete>
+      <input matSliderThumb [formField]="collageForm.collageSize"/>
+    </mat-slider>
+  </div>
 
-  <mat-form-field appearance="outline">
-    <mat-label>
-      Tile Size in px ({{ limits.tileSize.min }} – {{ limits.tileSize.max }})
-    </mat-label>
-    <input matInput
-           type="number"
-           [formField]="collageForm.tileSize"/>
-    <mat-hint>
-      Size of single avatar in the collage in px
-    </mat-hint>
-    @if (collageForm.tileSize().touched() && collageForm.tileSize().errors().length) {
-      <mat-error>{{ collageForm.tileSize().errors()[0].message }}</mat-error>
-    }
-  </mat-form-field>
+  <div class="slider-field">
+    <mat-form-field appearance="outline" class="value-display">
+      <mat-label>Tile Size (px)</mat-label>
+      <input matInput [value]="collageForm.tileSize().value()" disabled/>
+    </mat-form-field>
+    <mat-slider [min]="limits.tileSize.min" [max]="limits.tileSize.max" discrete>
+      <input matSliderThumb [formField]="collageForm.tileSize"/>
+    </mat-slider>
+  </div>
 
   <button class="gen-btn"
           mat-raised-button

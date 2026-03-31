@@ -6,6 +6,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSliderModule} from '@angular/material/slider';
 import {CollageConstants} from '../../constants/collage-constants';
 import {FormsModule} from '@angular/forms';
 import {debounceTime, skip} from 'rxjs';
@@ -20,6 +21,7 @@ import {debounceTime, skip} from 'rxjs';
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
     FormField,
     FormsModule,
   ],
