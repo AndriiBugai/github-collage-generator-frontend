@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.value-display {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+mat-slider {
+  flex: 1;
+}

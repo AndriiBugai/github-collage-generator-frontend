@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline" class="value-display">
+  <mat-label>{{ label() }}</mat-label>
+  <input matInput [value]="currentValue()" disabled/>
+</mat-form-field>
+<mat-slider [min]="min()"
+            [max]="max()" discrete>
+  <input matSliderThumb [formField]="field()"/>
+</mat-slider>

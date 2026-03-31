@@ -14,25 +14,15 @@
     }
   </mat-form-field>
 
-  <div class="slider-field">
-    <mat-form-field appearance="outline" class="value-display">
-      <mat-label>Collage Size</mat-label>
-      <input matInput [value]="collageForm.collageSize().value()" disabled/>
-    </mat-form-field>
-    <mat-slider [min]="limits.collageSize.min" [max]="limits.collageSize.max" discrete>
-      <input matSliderThumb [formField]="collageForm.collageSize"/>
-    </mat-slider>
-  </div>
+  <app-slider-field label="Collage Size"
+                    [min]="limits.collageSize.min"
+                    [max]="limits.collageSize.max"
+                    [field]="collageForm.collageSize"/>
 
-  <div class="slider-field">
-    <mat-form-field appearance="outline" class="value-display">
-      <mat-label>Tile Size (px)</mat-label>
-      <input matInput [value]="collageForm.tileSize().value()" disabled/>
-    </mat-form-field>
-    <mat-slider [min]="limits.tileSize.min" [max]="limits.tileSize.max" discrete>
-      <input matSliderThumb [formField]="collageForm.tileSize"/>
-    </mat-slider>
-  </div>
+  <app-slider-field label="Tile Size (px)"
+                    [min]="limits.tileSize.min"
+                    [max]="limits.tileSize.max"
+                    [field]="collageForm.tileSize"/>
 
   <button class="gen-btn"
           mat-raised-button
