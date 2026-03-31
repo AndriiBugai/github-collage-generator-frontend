@@ -4,15 +4,14 @@
   <app-collage-form [isLoading]="isLoading()"
                     (formSubmit)="onFormSubmitted($event)"
                     (formChange)="onFormChanged($event)"/>
+</div>
 
-  <div class="result">
-    @if (isLoadedSuccessfully() && imageUrl()) {
-      <img [src]="imageUrl()" alt="GitHub Collage"/>
-    } @else {
-      <app-collage-preview [tileSize]="tileSize()"
-                           [collageSize]="collageSize()"
-                           [isLoading]="isLoading()"/>
-    }
-  </div>
-
+<div class="result">
+  @if (isLoadedSuccessfully() && imageUrl()) {
+    <img [src]="imageUrl()" alt="GitHub Collage"/>
+  } @else {
+    <app-collage-preview [tileSize]="tileSize()"
+                         [collageSize]="collageSize()"
+                         [isLoading]="isLoading()"/>
+  }
 </div>
