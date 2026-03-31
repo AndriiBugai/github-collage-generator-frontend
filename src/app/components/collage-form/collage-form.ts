@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, input, output, signal} from '@angular/core';
+import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
 import {form, FormField, required, min, max} from '@angular/forms/signals';
 import {CollageFormLimitsModel, CollageFormModel} from './collage-form-model';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -7,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CollageConstants} from '../../constants/collage-constants';
 import {FormsModule} from '@angular/forms';
+import {debounceTime, skip} from 'rxjs';
 
 @Component({
   selector: 'app-collage-form',
@@ -25,6 +27,7 @@ import {FormsModule} from '@angular/forms';
 export class CollageForm {
   isLoading = input(false);
   formSubmit = output<CollageFormModel>();
+  formChange = output<CollageFormModel>();
 
   private model = signal<CollageFormModel>({
     username: 'octocat', // random GitHub username for a quick demo to make form valid for quick form submit
@@ -46,6 +49,14 @@ export class CollageForm {
     min(f.tileSize, this.limits.tileSize.min, {message: `Min value is ${this.limits.tileSize.min}`});
     max(f.tileSize, this.limits.tileSize.max, {message: `Max value is ${this.limits.tileSize.max}`});
   });
+
+  constructor() {
+    toObservable(this.model).pipe(
+      skip(1),
+      debounceTime(300),
+      takeUntilDestroyed(),
+    ).subscribe(model => this.formChange.emit(model));
+  }
 
   public onSubmit() {
     if (this.collageForm().valid()) {

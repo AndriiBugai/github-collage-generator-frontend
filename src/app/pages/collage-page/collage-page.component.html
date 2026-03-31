@@ -2,12 +2,17 @@
   <h1>GitHub Collage Generator</h1>
 
   <app-collage-form [isLoading]="isLoading()"
-                    (formSubmit)="generateCollage($event)"/>
+                    (formSubmit)="onFormSubmitted($event)"
+                    (formChange)="onFormChanged($event)"/>
 
-
-  @if (isLoadedSuccessfully() && imageUrl()) {
-    <div class="result">
+  <div class="result">
+    @if (isLoadedSuccessfully() && imageUrl()) {
       <img [src]="imageUrl()" alt="GitHub Collage"/>
-    </div>
-  }
+    } @else {
+      <app-collage-preview [tileSize]="tileSize()"
+                           [collageSize]="collageSize()"
+                           [isLoading]="isLoading()"/>
+    }
+  </div>
+
 </div>
