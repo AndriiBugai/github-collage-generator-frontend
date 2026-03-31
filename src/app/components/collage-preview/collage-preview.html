@@ -1,0 +1,8 @@
+<div class="collage-preview"
+     [class.loading]="isLoading()"
+     [style.grid-template-columns]="'repeat(' + cols() + ', ' + tileSize() + 'px)'"
+     [style.grid-template-rows]="'repeat(' + rows() + ', ' + tileSize() + 'px)'">
+  @for (tile of tiles(); track $index) {
+    <div class="tile"></div>
+  }
+</div>
