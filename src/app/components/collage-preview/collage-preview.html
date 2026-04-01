@@ -1,5 +1,8 @@
 <div class="collage-preview"
      [class.loading]="isLoading()"
+     role="img"
+     [attr.aria-busy]="isLoading()"
+     [attr.aria-label]="isLoading() ? 'Collage preview loading' : 'Collage preview'"
      [style.grid-template-columns]="'repeat(' + cols() + ', ' + tileSize() + 'px)'"
      [style.grid-template-rows]="'repeat(' + rows() + ', ' + tileSize() + 'px)'">
   @for (tile of tiles(); track $index) {

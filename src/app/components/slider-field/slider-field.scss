@@ -1,14 +1,18 @@
 :host {
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
+  flex-direction: column;
 
-.value-display {
-  width: 120px;
-  flex-shrink: 0;
-}
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-mat-slider {
-  flex: 1;
+  .slider {
+    padding: 0 8px 0 0;
+
+    mat-slider {
+      width: 100%;
+    }
+  }
 }

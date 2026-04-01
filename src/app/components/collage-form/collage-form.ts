@@ -72,10 +72,6 @@ export class CollageForm {
       onError: (): TreeValidationResult => ({kind: 'failed', message: 'Validation failed'}),
     });
     required(f.collageSize, {message: 'This field is required'});
-    min(f.collageSize, this.limits.collageSize.min, {message: `Min value is ${this.limits.collageSize.min}`});
-    max(f.collageSize, this.limits.collageSize.max, {message: `Max value is ${this.limits.collageSize.max}`});
-    min(f.tileSize, this.limits.tileSize.min, {message: `Min value is ${this.limits.tileSize.min}`});
-    max(f.tileSize, this.limits.tileSize.max, {message: `Max value is ${this.limits.tileSize.max}`});
   });
 
   constructor() {

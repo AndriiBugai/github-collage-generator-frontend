@@ -11,7 +11,9 @@
       <mat-spinner appSpinner matSuffix label="Validating username"/>
     }
     @if (collageForm.username().touched() && collageForm.username().errors().length) {
-      <mat-error>{{ collageForm.username().errors()[0].message }}</mat-error>
+      <mat-error>
+        {{ collageForm.username().errors()[0].message }}
+      </mat-error>
     }
   </mat-form-field>
 

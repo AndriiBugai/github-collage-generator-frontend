@@ -1,14 +1,12 @@
 import {Component, computed, input} from '@angular/core';
 import {Field, FormField} from '@angular/forms/signals';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
 
 @Component({
   selector: 'app-slider-field',
   templateUrl: './slider-field.html',
   styleUrl: './slider-field.scss',
-  imports: [MatFormFieldModule, MatInputModule, MatSliderModule, FormField],
+  imports: [MatSliderModule, FormField],
 })
 export class SliderField {
   label = input.required<string>();
@@ -17,4 +15,7 @@ export class SliderField {
   field = input.required<Field<number>>();
 
   currentValue = computed(() => this.field()().value());
+
+  private static nextId = 0;
+  protected readonly labelId = `slider-label-${SliderField.nextId++}`;
 }
