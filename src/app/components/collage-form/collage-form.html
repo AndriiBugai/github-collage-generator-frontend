@@ -8,7 +8,7 @@
            placeholder="e.g. octocat"/>
     <mat-hint>GitHub user for which collage will be generated</mat-hint>
     @if (collageForm.username().pending()) {
-      <mat-spinner class="spinner" matSuffix diameter="20"/>
+      <mat-spinner appSpinner matSuffix label="Validating username"/>
     }
     @if (collageForm.username().touched() && collageForm.username().errors().length) {
       <mat-error>{{ collageForm.username().errors()[0].message }}</mat-error>
@@ -31,7 +31,7 @@
           type="submit"
           [disabled]="isLoading()">
     @if (isLoading()) {
-      <mat-spinner diameter="20"/>
+      <mat-spinner appSpinner label="Generating collage"/>
     } @else {
       Generate Collage
     }

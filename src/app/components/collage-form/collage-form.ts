@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, input, output, resource, signal} from '@angular/core';
+import {Component, inject, input, output, resource, signal} from '@angular/core';
 import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
 import {
   form,
@@ -16,6 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SliderField} from '../slider-field/slider-field';
+import {SpinnerDirective} from '../../directives/spinner.directive';
 import {CollageConstants} from '../../constants/collage-constants';
 import {FormsModule} from '@angular/forms';
 import {debounceTime, skip} from 'rxjs';
@@ -25,7 +26,6 @@ import {CollageApiService} from '../../api/collage-api.service';
   selector: 'app-collage-form',
   templateUrl: './collage-form.html',
   styleUrl: './collage-form.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -33,6 +33,7 @@ import {CollageApiService} from '../../api/collage-api.service';
     MatProgressSpinnerModule,
     FormField,
     SliderField,
+    SpinnerDirective,
     FormsModule,
   ],
 })
