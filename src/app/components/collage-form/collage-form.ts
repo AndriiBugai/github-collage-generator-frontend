@@ -1,6 +1,15 @@
-import {ChangeDetectionStrategy, Component, input, output, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input, output, resource, signal} from '@angular/core';
 import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
-import {form, FormField, required, min, max} from '@angular/forms/signals';
+import {
+  form,
+  FormField,
+  required,
+  min,
+  max,
+  debounce,
+  validateAsync,
+  TreeValidationResult
+} from '@angular/forms/signals';
 import {CollageFormLimitsModel, CollageFormModel} from './collage-form-model';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -10,6 +19,7 @@ import {SliderField} from '../slider-field/slider-field';
 import {CollageConstants} from '../../constants/collage-constants';
 import {FormsModule} from '@angular/forms';
 import {debounceTime, skip} from 'rxjs';
+import {CollageApiService} from '../../api/collage-api.service';
 
 @Component({
   selector: 'app-collage-form',
@@ -31,6 +41,8 @@ export class CollageForm {
   formSubmit = output<CollageFormModel>();
   formChange = output<CollageFormModel>();
 
+  private collageApiService = inject(CollageApiService);
+
   private model = signal<CollageFormModel>({
     username: 'octocat', // random GitHub username for a quick demo to make form valid for quick form submit
     collageSize: CollageConstants.COLLAGE_SIZE,
@@ -42,9 +54,22 @@ export class CollageForm {
     tileSize: {min: 25, max: 100},
   };
 
-  // TODO add a helper for validation messages
+  private readonly debounceTime = 400;
+
   public collageForm = form(this.model, (f) => {
     required(f.username, {message: 'This field is required'});
+    debounce(f.username, this.debounceTime);
+    validateAsync(f.username, {
+      params: (ctx) => ctx.value(),
+      factory: (params) => resource({
+        params: () => params(),
+        loader: ({params: username}) => this.collageApiService.checkUsernameExists(username),
+      }),
+      onSuccess: (exists: boolean): TreeValidationResult => {
+        return exists ? undefined : {kind: 'not found', message: 'GitHub user not found'}
+      },
+      onError: (): TreeValidationResult => ({kind: 'failed', message: 'Validation failed'}),
+    });
     required(f.collageSize, {message: 'This field is required'});
     min(f.collageSize, this.limits.collageSize.min, {message: `Min value is ${this.limits.collageSize.min}`});
     max(f.collageSize, this.limits.collageSize.max, {message: `Max value is ${this.limits.collageSize.max}`});
@@ -55,7 +80,7 @@ export class CollageForm {
   constructor() {
     toObservable(this.model).pipe(
       skip(1),
-      debounceTime(300),
+      debounceTime(this.debounceTime),
       takeUntilDestroyed(),
     ).subscribe(model => this.formChange.emit(model));
   }
@@ -63,6 +88,10 @@ export class CollageForm {
   public onSubmit() {
     if (this.collageForm().valid()) {
       this.formSubmit.emit(this.collageForm().value());
+    } else {
+      this.collageForm.username().markAsTouched();
+      this.collageForm.collageSize().markAsTouched();
+      this.collageForm.tileSize().markAsTouched();
     }
   }
 }

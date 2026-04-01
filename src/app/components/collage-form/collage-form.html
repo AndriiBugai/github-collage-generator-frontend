@@ -2,13 +2,14 @@
       (ngSubmit)="onSubmit()">
 
   <mat-form-field appearance="outline">
-    <mat-label>
-      GitHub Username
-    </mat-label>
+    <mat-label>GitHub Username</mat-label>
     <input matInput
            [formField]="collageForm.username"
            placeholder="e.g. octocat"/>
     <mat-hint>GitHub user for which collage will be generated</mat-hint>
+    @if (collageForm.username().pending()) {
+      <mat-spinner class="spinner" matSuffix diameter="20"/>
+    }
     @if (collageForm.username().touched() && collageForm.username().errors().length) {
       <mat-error>{{ collageForm.username().errors()[0].message }}</mat-error>
     }
