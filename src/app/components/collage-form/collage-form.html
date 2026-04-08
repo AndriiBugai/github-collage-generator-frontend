@@ -18,14 +18,14 @@
   </mat-form-field>
 
   <app-slider-field label="Collage Size"
-                    [min]="limits.collageSize.min"
-                    [max]="limits.collageSize.max"
-                    [field]="collageForm.collageSize"/>
+                    [minVal]="limits.collageSize.min"
+                    [maxVal]="limits.collageSize.max"
+                    [formField]="collageForm.collageSize"/>
 
   <app-slider-field label="Tile Size (px)"
-                    [min]="limits.tileSize.min"
-                    [max]="limits.tileSize.max"
-                    [field]="collageForm.tileSize"/>
+                    [minVal]="limits.tileSize.min"
+                    [maxVal]="limits.tileSize.max"
+                    [formField]="collageForm.tileSize"/>
 
   <button class="gen-btn"
           mat-raised-button

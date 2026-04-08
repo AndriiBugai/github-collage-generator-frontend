@@ -1,14 +1,15 @@
 <div class="label-row">
   <label [attr.for]="labelId">{{ label() }}</label>
-  <span aria-hidden="true">{{ currentValue() }}</span>
+  <span aria-hidden="true">{{ value() }}</span>
 </div>
 
 <div class="slider">
   <mat-slider discrete
-              [min]="min()"
-              [max]="max()">
+              [min]="minVal()"
+              [max]="maxVal()">
     <input matSliderThumb
            [id]="labelId"
-           [formField]="field()"/>
+           [value]="value()"
+           (valueChange)="value.set($event)"/>
   </mat-slider>
 </div>
